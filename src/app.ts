@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 import { userRouter } from "routes";
+import { swagger } from "middlewares";
 
 dotenv.config();
 connectToMongo();
@@ -13,5 +14,6 @@ const server = express();
 
 server.use(bodyParser.json());
 server.use("/api", cors(), userRouter);
+server.use("/", ...swagger());
 
 server.listen(process.env.PORT || 4000);
