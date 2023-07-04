@@ -12,3 +12,8 @@ interface UserI {
   address: string;
   id: string;
 }
+
+interface VerifyEmailI {
+  hash: string;
+  email: string;
+}
