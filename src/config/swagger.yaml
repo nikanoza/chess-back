@@ -35,8 +35,8 @@ paths:
                   type: string
                 repeatPassword:
                   type: string
-                # redirectLink:
-                #   type: string
+                redirectLink:
+                  type: string
       responses:
         "201":
           description: user register successfully

@@ -8,7 +8,8 @@ import crypto from "crypto";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { username, email, password, repeatPassword } = req.body;
+    const { username, email, password, repeatPassword, redirectLink } =
+      req.body;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -18,6 +19,7 @@ export const register = async (req: Request, res: Response) => {
       email,
       password,
       repeatPassword,
+      redirectLink,
     });
 
     const id = uuid();
@@ -35,7 +37,7 @@ export const register = async (req: Request, res: Response) => {
       email,
     });
 
-    await sendEmailVerification(email, hash, username, backLink);
+    await sendEmailVerification(email, hash, username, value.redirectLink);
     return res.send(user);
   } catch (error) {
     return res.status(400).send(error);

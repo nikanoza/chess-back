@@ -21,6 +21,7 @@ const registerSchema = Joi.object({
     }),
   password: Joi.string().min(8).max(15).required(),
   repeatPassword: Joi.ref("password"),
+  redirectLink: Joi.string().uri().required(),
 });
 
 export default registerSchema;
