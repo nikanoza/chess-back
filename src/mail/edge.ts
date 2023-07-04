@@ -37,7 +37,21 @@ export const sendEmailVerification = async (
   name: string,
   backLink: string
 ) => {
-  const html = edge.renderSync("user-verify", {
+  const html = edge.renderSync("verify", {
+    link: `${backLink}?hash=${hash}`,
+    name,
+  });
+
+  return send(to, "Verify User", html);
+};
+
+export const sendRecoveryMail = async (
+  to: string,
+  hash: string,
+  name: string,
+  backLink: string
+) => {
+  const html = edge.renderSync("verify", {
     link: `${backLink}?hash=${hash}`,
     name,
   });
