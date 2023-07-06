@@ -43,3 +43,5 @@ export const register = async (req: Request, res: Response) => {
     return res.status(400).send(error);
   }
 };
+
+export const login = async (req: Request, res: Response) => {};

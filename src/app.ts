@@ -13,6 +13,9 @@ connectToMongo();
 const server = express();
 
 server.use(bodyParser.json());
+
+server.use("/images", express.static("public/storage"));
+
 server.use("/api", cors(), userRouter);
 server.use("/", ...swagger());
 
