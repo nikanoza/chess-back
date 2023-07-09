@@ -17,3 +17,5 @@ interface VerifyEmailI {
   hash: string;
   email: string;
 }
+
+interface PasswordRecoveryI extends VerifyEmailI {}
