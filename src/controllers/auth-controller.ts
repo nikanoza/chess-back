@@ -39,7 +39,7 @@ export const register = async (req: Request, res: Response) => {
     });
 
     await sendEmailVerification(email, hash, username, value.redirectLink);
-    return res.send(user);
+    return res.status(200).send(user);
   } catch (error) {
     return res.status(400).send(error);
   }
@@ -70,7 +70,7 @@ export const login = async (req: Request, res: Response) => {
       };
 
       const token = jwt.sign(signData, process.env.JWT_SECRET!);
-      return res.json({ ...signData, token });
+      return res.status(200).json({ ...signData, token });
     }
     return res
       .status(401)

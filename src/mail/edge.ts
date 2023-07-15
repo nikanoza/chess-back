@@ -17,20 +17,6 @@ const send = (to: string, subject: string, html: any) => {
   return mailTransport.sendMail(options);
 };
 
-// export const sendPasswordRecovery = async (
-//   to: string,
-//   hash: string,
-//   name: string,
-//   backLink: string
-// ) => {
-//   const html = edge.renderSync("password-recovery", {
-//     link: `${backLink}?hash=${hash}`,
-//     name,
-//   });
-
-//   return send(to, "Password Reset", html);
-// };
-
 export const sendEmailVerification = async (
   to: string,
   hash: string,
