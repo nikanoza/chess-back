@@ -71,18 +71,16 @@ export const verifyAccount = async(req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    const value = await loginSchema.validateAsync({
+    await loginSchema.validateAsync({
       email,
       password,
     });
-
-    const user = await User.findOne({ email: value.email }).select("+password");
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       return res.status(400).json({ message: "user not found!" });
     }
     const result = await bcrypt.compare(password, user.password);
-
     if (result) {
       const signData = {
         username: user.username,
@@ -95,6 +93,7 @@ export const login = async (req: Request, res: Response) => {
       const token = jwt.sign(signData, process.env.JWT_SECRET!);
       return res.status(200).json({ ...signData, token });
     }
+
     return res
       .status(401)
       .json({ message: "please, provide correct credentials..." });
