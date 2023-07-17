@@ -60,7 +60,8 @@ export const verifyAccount = async(req: Request, res: Response) => {
       return res.status(400).json({ message: "user not exist" });
     }
     user.verify = true;
-    await user.save()
+    await user.save();
+    await verifyDocument.deleteOne();
     return res.status(200).json({message: "account verify"})
   } catch (error) {
     return res.status(400).send(error);
