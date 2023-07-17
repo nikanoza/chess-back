@@ -7,3 +7,4 @@ recoveryRouter.post("/recovery", sendRecoveryRequest)
 recoveryRouter.put("/reset", passwordReset )
 
 export default recoveryRouter
+

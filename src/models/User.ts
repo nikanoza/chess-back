@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const { String, Number } = Schema.Types;
+const { String, Number, Boolean } = Schema.Types;
 
 const purchaseSchema = new Schema<PurchaseI>({
   productId: {
@@ -32,6 +32,10 @@ const userSchema = new Schema<UserI>({
   },
   address: {
     type: String,
+    required: false,
+  },
+  verify: {
+    type: Boolean,
     required: false,
   },
   purchase: [purchaseSchema],

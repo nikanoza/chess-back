@@ -29,6 +29,7 @@ export const register = async (req: Request, res: Response) => {
       username: value.username,
       email: value.email,
       password: hashedPassword,
+      verify: false,
       purchase: [],
       id,
     });
@@ -44,6 +45,27 @@ export const register = async (req: Request, res: Response) => {
     return res.status(400).send(error);
   }
 };
+
+export const verifyAccount = async(req: Request, res: Response) => {
+  try {
+    const { hash } = req.body;
+    const verifyDocument = await EmailVerify.findOne({hash});
+    if(!verifyDocument){
+      return res.status(400).json({ message: "incorrect credentials" });
+    }
+
+    const user = await User.findOne({ email: verifyDocument.email})
+
+    if(!user){
+      return res.status(400).json({ message: "user not exist" });
+    }
+    user.verify = true;
+    await user.save()
+    return res.status(200).json({message: "account verify"})
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+}
 
 export const login = async (req: Request, res: Response) => {
   try {

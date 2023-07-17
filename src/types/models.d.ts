@@ -10,6 +10,7 @@ interface UserI {
   password: string;
   purchase: PurchaseI[];
   address: string;
+  verify: boolean;
   id: string;
 }
 
