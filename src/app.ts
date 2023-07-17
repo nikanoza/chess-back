@@ -17,7 +17,7 @@ server.use(bodyParser.json());
 server.use("/images", express.static("public/storage"));
 
 server.use("/api", cors(), userRouter);
-server.use("/api", cors(), recoveryRouter)
+server.use("/api", cors(), recoveryRouter);
 server.use("/", ...swagger());
 
 server.listen(process.env.PORT || 4000);
