@@ -53,7 +53,7 @@ export const passwordReset = async (req: Request, res:Response) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     await User.findOneAndUpdate({ email: verifyDocument.email}, { password: hashedPassword});
-    await verifyDocument.deleteOne()
+    await verifyDocument.deleteOne();
     return res.status(200).json({message: "password update successfully"})
 
   } catch (error) {
