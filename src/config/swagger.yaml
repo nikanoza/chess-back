@@ -76,4 +76,23 @@ paths:
       responses:
         "200":
           description: we send password update instruction on your mail 
-      
+  /reset:
+    put:
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                password:
+                  type: string
+                repeatPassword:
+                  type: string
+                hash:
+                  type: string
+      responses:
+        "200":
+          description: password reset!
